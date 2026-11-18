@@ -1,0 +1,101 @@
+[
+  {
+    "order": {
+      "referenceNumber": "RN000000000",
+      "orderStatus": "BOOKED",
+      "orderSubstatus": "_Z",
+      "modelCode": "my",
+      "trimCode": "EXAMPLE",
+      "mktOptions": "APBS,PPSB,W39B,INBPB,STY5S",
+      "countryCode": "PL"
+    },
+    "details": {
+      "tasks": {
+        "registration": {
+          "id": "registration",
+          "complete": false,
+          "enabled": true,
+          "required": true,
+          "status": "INCOMPLETE",
+          "order": 4,
+          "strings": {"name": "Registration"},
+          "orderDetails": {
+            "orderPlacedDate": "2025-01-10T09:00:00",
+            "orderBookedDate": "2025-01-10T09:15:00",
+            "reservationDate": "2025-01-10T08:55:00",
+            "vehicleRoutingLocation": 0,
+            "vehicleOdometer": 0,
+            "vehicleOdometerType": "KM"
+          }
+        },
+        "deliveryDetails": {
+          "id": "deliveryDetails",
+          "complete": true,
+          "enabled": true,
+          "required": true,
+          "status": "COMPLETE",
+          "order": 1,
+          "strings": {"name": "Delivery Details"},
+          "regData": {
+            "deliveryDetails": {
+              "deliveryType": "PICKUP_SERVICE_CENTER",
+              "pickupLocationTrtId": 0,
+              "address": {
+                "address1": "ul. Przykladowa 1",
+                "city": "Przykladowo",
+                "stateProvince": "",
+                "zipCode": "00-000",
+                "countryCode": "PL"
+              }
+            }
+          }
+        },
+        "financing": {
+          "id": "financing",
+          "complete": true,
+          "enabled": true,
+          "required": true,
+          "status": "COMPLETE",
+          "order": 2,
+          "strings": {"name": "Financing"}
+        },
+        "scheduling": {
+          "id": "scheduling",
+          "complete": false,
+          "enabled": false,
+          "required": true,
+          "status": "INCOMPLETE",
+          "order": 5,
+          "strings": {"name": "Scheduling"},
+          "deliveryAppointmentDate": null,
+          "estimatedDelivery": null
+        },
+        "finalPayment": {
+          "id": "finalPayment",
+          "complete": false,
+          "enabled": false,
+          "required": true,
+          "status": "INCOMPLETE",
+          "order": 6,
+          "strings": {"name": "Final Payment"},
+          "data": {
+            "amountDue": 0,
+            "reservationAmountReceived": 1000,
+            "financingDetails": {
+              "orderType": "NEW",
+              "financialProductType": "LEASE",
+              "teslaFinanceDetails": {
+                "adjustedPurchasePrice": 199000,
+                "downpaymentToLessor": 50000,
+                "monthlyPayment": 2890.5,
+                "interestRate": 5.5,
+                "termsInMonths": "48",
+                "financePartnerName": "Example Finance Partner"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

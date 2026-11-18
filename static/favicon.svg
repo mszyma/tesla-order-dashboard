@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="carGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e53e3e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c53030;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Car body -->
+  <path d="M6 18h20c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2z" fill="url(#carGradient)"/>
+  <!-- Car windshield -->
+  <path d="M8 10h16l-2-3H10l-2 3z" fill="#4a5568"/>
+  <!-- Car wheels -->
+  <circle cx="10" cy="20" r="3" fill="#2d3748"/>
+  <circle cx="22" cy="20" r="3" fill="#2d3748"/>
+  <!-- Wheel centers -->
+  <circle cx="10" cy="20" r="1.5" fill="#718096"/>
+  <circle cx="22" cy="20" r="1.5" fill="#718096"/>
+  <!-- Car headlights -->
+  <circle cx="6" cy="14" r="1" fill="#ffd700"/>
+  <circle cx="26" cy="14" r="1" fill="#ffd700"/>
+</svg>

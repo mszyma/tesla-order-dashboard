@@ -1,0 +1,257 @@
+# Polish translations for Tesla Order Dashboard
+# Copyright (C) 2024
+# This file is distributed under the same license as the Tesla Order Dashboard project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Tesla Order Dashboard 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-11 12:00+0000\n"
+"PO-Revision-Date: 2024-09-11 12:00+0000\n"
+"Last-Translator: \n"
+"Language: pl\n"
+"Language-Team: Polish\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Manual translation\n"
+
+# Header and Navigation
+msgid "Tesla Order Dashboard"
+msgstr "Panel Zamówienia Tesla"
+
+msgid "Order"
+msgstr "Zamówienie"
+
+msgid "Refresh Data"
+msgstr "Odśwież Dane"
+
+msgid "Last updated"
+msgstr "Ostatnia aktualizacja"
+
+msgid "Auto-refresh"
+msgstr "Auto-odświeżanie"
+
+msgid "Load Data"
+msgstr "Załaduj Dane"
+
+# Main Sections
+msgid "Order Status"
+msgstr "Status Zamówienia"
+
+msgid "Delivery"
+msgstr "Dostawa"
+
+msgid "Vehicle Configuration"
+msgstr "Konfiguracja Pojazdu"
+
+msgid "Order Timeline"
+msgstr "Oś Czasu Zamówienia"
+
+msgid "Task Progress"
+msgstr "Postęp Zadań"
+
+msgid "Interesting Facts"
+msgstr "Ciekawe Fakty"
+
+msgid "Progress"
+msgstr "Postęp"
+
+msgid "Financial"
+msgstr "Finanse"
+
+# Vehicle Details
+msgid "Model"
+msgstr "Model"
+
+msgid "VIN"
+msgstr "VIN"
+
+msgid "Country"
+msgstr "Kraj"
+
+msgid "Color"
+msgstr "Kolor"
+
+msgid "Wheels"
+msgstr "Felgi"
+
+msgid "Interior"
+msgstr "Wnętrze"
+
+msgid "Options & Features"
+msgstr "Opcje i Funkcje"
+
+# Delivery Information
+msgid "Type"
+msgstr "Typ"
+
+msgid "Location"
+msgstr "Lokalizacja"
+
+msgid "Appointment"
+msgstr "Termin"
+
+msgid "Not scheduled"
+msgstr "Nie zaplanowano"
+
+msgid "Not assigned"
+msgstr "Nie przypisano"
+
+# Financial Information
+msgid "Monthly Payment"
+msgstr "Miesięczna Rata"
+
+msgid "Total Price"
+msgstr "Cena Całkowita"
+
+msgid "Term"
+msgstr "Okres"
+
+msgid "months"
+msgstr "miesięcy"
+
+# Status Messages
+msgid "BOOKED"
+msgstr "ZAREZERWOWANE"
+
+msgid "Pickup Service Center"
+msgstr "Centrum Serwisowe Odbioru"
+
+# Task Status
+msgid "Pending"
+msgstr "Oczekujące"
+
+msgid "Completed"
+msgstr "Ukończone"
+
+msgid "Required"
+msgstr "Wymagane"
+
+msgid "tasks completed"
+msgstr "zadań ukończonych"
+
+# No Data State
+msgid "No Order Data Available"
+msgstr "Brak Dostępnych Danych Zamówienia"
+
+msgid "Click the refresh button to load your Tesla order data."
+msgstr "Kliknij przycisk odświeżania, aby załadować dane zamówienia Tesla."
+
+# Error Messages
+msgid "Failed to refresh data. Please try again."
+msgstr "Nie udało się odświeżyć danych. Spróbuj ponownie."
+
+msgid "Data refreshed successfully."
+msgstr "Dane zostały pomyślnie odświeżone."
+
+# Time Formats
+msgid "Just now"
+msgstr "Właśnie teraz"
+
+msgid "minute ago"
+msgid_plural "minutes ago"
+msgstr[0] "minutę temu"
+msgstr[1] "minuty temu"
+msgstr[2] "minut temu"
+
+msgid "hour ago"
+msgid_plural "hours ago"
+msgstr[0] "godzinę temu"
+msgstr[1] "godziny temu"
+msgstr[2] "godzin temu"
+
+msgid "day ago"
+msgid_plural "days ago"
+msgstr[0] "dzień temu"
+msgstr[1] "dni temu"
+msgstr[2] "dni temu"
+
+# Notifications
+msgid "Your VIN has been assigned"
+msgstr "Twój numer VIN został przypisany"
+
+msgid "Tesla VIN Assigned!"
+msgstr "Numer VIN Tesla Przypisany!"
+
+msgid "Your VIN is now available"
+msgstr "Twój numer VIN jest teraz dostępny"
+
+msgid "View Dashboard"
+msgstr "Zobacz Panel"
+
+msgid "Notifications enabled! You'll be notified when your VIN is assigned."
+msgstr "Powiadomienia włączone! Otrzymasz powiadomienie, gdy zostanie przypisany numer VIN."
+
+# Common task statuses and delivery types
+msgid "Home Delivery"
+msgstr "Dostawa do Domu"
+
+msgid "Service Center Pickup"
+msgstr "Odbiór z Centrum Serwisowego"
+
+msgid "Tesla Center"
+msgstr "Centrum Tesla"
+
+msgid "Enabled"
+msgstr "Włączone"
+
+msgid "Disabled"
+msgstr "Wyłączone"
+
+msgid "In Progress"
+msgstr "W Trakcie"
+
+msgid "Complete"
+msgstr "Ukończone"
+
+msgid "N/A"
+msgstr "Nie dotyczy"
+
+# Vehicle models and colors (common ones)
+msgid "Model 3"
+msgstr "Model 3"
+
+msgid "Model Y"
+msgstr "Model Y"
+
+msgid "Model S"
+msgstr "Model S"
+
+msgid "Model X"
+msgstr "Model X"
+
+msgid "Pearl White Multi-Coat"
+msgstr "Perłowa Biel Multi-Coat"
+
+msgid "Solid Black"
+msgstr "Czarna Solidna"
+
+msgid "Midnight Silver Metallic"
+msgstr "Metaliczna Srebrna Północ"
+
+msgid "Deep Blue Metallic"
+msgstr "Metaliczna Głęboka Niebieska"
+
+msgid "Pearl White"
+msgstr "Perłowa Biel"
+
+# Task names (common ones that might appear)
+msgid "Schedule Delivery"
+msgstr "Zaplanuj Dostawę"
+
+msgid "Upload Documents"
+msgstr "Prześlij Dokumenty"
+
+msgid "Payment Processing"
+msgstr "Przetwarzanie Płatności"
+
+msgid "Final Inspection"
+msgstr "Końcowa Inspekcja"
+
+msgid "Vehicle Preparation"
+msgstr "Przygotowanie Pojazdu"
+
+msgid "Documentation Review"
+msgstr "Przegląd Dokumentacji"

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🚗 {{ _('Tesla Order Dashboard') }}</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <div class="header-content">
+          <div class="header-left">
+            <h1><i class="fas fa-car"></i> {{ _('Tesla Order Dashboard') }}</h1>
+            {% if data and data.orders %}
+            <p class="header-subtitle">
+              {{ _('Order') }} {{ data.orders[0].basic_info.reference_number }}
+            </p>
+            {% endif %}
+          </div>
+          <div class="header-right">
+            <div class="language-switcher">
+              <select id="languageSelect" class="language-select">
+                <option value="en" {{ 'selected' if session.get('language', 'en') == 'en' else '' }}>🇺🇸 English</option>
+                <option value="pl" {{ 'selected' if session.get('language', 'en') == 'pl' else '' }}>🇵🇱 Polski</option>
+              </select>
+            </div>
+            <button id="refreshBtn" class="refresh-btn">
+              <i class="fas fa-sync-alt"></i> {{ _('Refresh Data') }}
+            </button>
+            <div class="last-updated">
+              {% if data %} {{ _('Last updated') }}:
+              <span id="lastUpdated">{{ data.last_updated }}</span>
+              <div class="auto-refresh-indicator">
+                <i class="fas fa-sync-alt"></i>
+                <span>{{ _('Auto-refresh') }}: 5 min</span>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="dashboard-main">
+        {% if not data %}
+        <!-- No Data State -->
+        <div class="no-data-state">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h2>{{ _('No Order Data Available') }}</h2>
+          <p>{{ _('Click the refresh button to load your Tesla order data.') }}</p>
+          <button onclick="refreshData()" class="btn btn-primary">
+            <i class="fas fa-sync-alt"></i> {{ _('Load Data') }}
+          </button>
+        </div>
+        {% else %}
+        <!-- Dashboard Content -->
+        {% for order in data.orders %}
+        <div class="order-section">
+          <!-- Main Overview Cards -->
+          <div class="overview-cards">
+            <div class="card status-card">
+              <div class="card-header">
+                <h3><i class="fas fa-info-circle"></i> {{ _('Order Status') }}</h3>
+              </div>
+              <div class="card-content">
+                <div
+                  class="status-badge status-{{ order.basic_info.status.lower() }}"
+                >
+                  {{ order.basic_info.status }}
+                </div>
+                <div class="status-details">
+                  <p>
+                    <strong>{{ _('Model') }}:</strong> Tesla {{ order.basic_info.model }}
+                  </p>
+                  <p>
+                    <strong>{{ _('VIN') }}:</strong>
+                    <span id="vinNumber" data-vin="{{ order.basic_info.vin }}"
+                      >{{ order.basic_info.vin }}</span
+                    >
+                  </p>
+                  <p>
+                    <strong>{{ _('Country') }}:</strong> {{ order.basic_info.country }}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card delivery-card">
+              <div class="card-header">
+                <h3><i class="fas fa-truck"></i> {{ _('Delivery') }}</h3>
+              </div>
+              <div class="card-content">
+                <p>
+                  <strong>{{ _('Type') }}:</strong> {{
+                  order.delivery_info.delivery_type.replace('_', ' ').title() }}
+                </p>
+                {% if order.delivery_info.pickup_location_name %}
+                <p>
+                  <strong>{{ _('Location') }}:</strong> {{
+                  order.delivery_info.pickup_location_name }}
+                </p>
+                {% endif %} {% if order.delivery_info.appointment_date %}
+                <p>
+                  <strong>{{ _('Appointment') }}:</strong> {{
+                  order.delivery_info.appointment_date }}
+                </p>
+                {% else %}
+                <p>
+                  <strong>{{ _('Appointment') }}:</strong>
+                  <span class="text-muted">{{ _('Not scheduled') }}</span>
+                </p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <!-- Vehicle Configuration Section -->
+          <div class="card vehicle-card">
+            <div class="card-header">
+              <h3><i class="fas fa-car"></i> {{ _('Vehicle Configuration') }}</h3>
+            </div>
+            <div class="card-content">
+              <div class="vehicle-info">
+                <div class="vehicle-main">
+                  <h4>Tesla {{ order.basic_info.model }}</h4>
+                  {% if order.vehicle_config.exterior_color %}
+                  <p>
+                    <strong>{{ _('Color') }}:</strong> {{
+                    order.vehicle_config.exterior_color }}
+                  </p>
+                  {% endif %} {% if order.vehicle_config.wheels %}
+                  <p>
+                    <strong>{{ _('Wheels') }}:</strong> {{ order.vehicle_config.wheels }}
+                  </p>
+                  {% endif %} {% if order.vehicle_config.interior %}
+                  <p>
+                    <strong>{{ _('Interior') }}:</strong> {{ order.vehicle_config.interior
+                    }}
+                  </p>
+                  {% endif %}
+                </div>
+                <div class="vehicle-options">
+                  <h5>{{ _('Options & Features') }}:</h5>
+                  <div class="options-grid">
+                    {% for option in order.vehicle_config.market_options %}
+                    <span class="option-tag">{{ option }}</span>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline Section - Moved below Vehicle Configuration -->
+          <div class="card timeline-card">
+            <div class="card-header">
+              <h3><i class="fas fa-history"></i> {{ _('Order Timeline') }}</h3>
+            </div>
+            <div class="card-content">
+              <div class="timeline">
+                {% for event in order.timeline %}
+                <div class="timeline-item">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <h4>{{ event.event }}</h4>
+                    <p class="timeline-date">{{ event.date }}</p>
+                    {% if event.details %}
+                    <p class="timeline-details">{{ event.details }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!-- Task Progress Section -->
+          <div class="card tasks-card">
+            <div class="card-header">
+              <h3><i class="fas fa-check-circle"></i> {{ _('Task Progress') }}</h3>
+            </div>
+            <div class="card-content">
+              <div class="tasks-grid">
+                {% for task_id, task in order.task_status.items() %}
+                <div
+                  class="task-item {{ 'completed' if task.complete else 'pending' }}"
+                >
+                  <div class="task-icon">
+                    {% if task.complete %}
+                    <i class="fas fa-check-circle"></i>
+                    {% elif task.enabled %}
+                    <i class="fas fa-clock"></i>
+                    {% else %}
+                    <i class="fas fa-circle"></i>
+                    {% endif %}
+                  </div>
+                  <div class="task-details">
+                    <h4>{{ task.name }}</h4>
+                    <p class="task-status">
+                      {{ task.status if task.status != 'N/A' else 'Pending' }}
+                    </p>
+                    {% if task.required %}
+                    <span class="required-badge">Required</span>
+                    {% endif %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!-- Interesting Facts Section - Moved to bottom -->
+          {% if data.facts %}
+          <div class="card facts-card">
+            <div class="card-header">
+              <h3><i class="fas fa-lightbulb"></i> {{ _('Interesting Facts') }}</h3>
+            </div>
+            <div class="card-content">
+              <div class="facts-grid">
+                {% for fact in data.facts %}
+                <div class="fact-item">{{ fact }}</div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Bottom Section Cards -->
+          <div class="bottom-cards">
+            <div class="card progress-card">
+              <div class="card-header">
+                <h3><i class="fas fa-tasks"></i> {{ _('Progress') }}</h3>
+              </div>
+              <div class="card-content">
+                {% set completed_tasks = order.task_status.values() |
+                selectattr('complete') | list | length %} {% set total_tasks =
+                order.task_status.values() | list | length %} {% set
+                progress_pct = (completed_tasks / total_tasks * 100) | round(1)
+                if total_tasks > 0 else 0 %}
+
+                <div class="progress-circle">
+                  <svg class="progress-ring" width="80" height="80">
+                    <circle
+                      class="progress-ring-circle"
+                      stroke="#e5e7eb"
+                      stroke-width="6"
+                      fill="transparent"
+                      r="34"
+                      cx="40"
+                      cy="40"
+                    />
+                    <circle
+                      class="progress-ring-circle progress-ring-fill"
+                      stroke="#10b981"
+                      stroke-width="6"
+                      fill="transparent"
+                      r="34"
+                      cx="40"
+                      cy="40"
+                      style="stroke-dasharray: {{ 2 * 3.14159 * 34 }}; stroke-dashoffset: {{ 2 * 3.14159 * 34 * (1 - progress_pct / 100) }};"
+                    />
+                  </svg>
+                  <div class="progress-text">{{ progress_pct }}%</div>
+                </div>
+                <p>{{ completed_tasks }}/{{ total_tasks }} tasks completed</p>
+              </div>
+            </div>
+
+            <div class="card financial-card">
+              <div class="card-header">
+                <h3><i class="fas fa-dollar-sign"></i> {{ _('Financial') }}</h3>
+              </div>
+              <div class="card-content">
+                {% if order.financial_info.monthly_payment %}
+                <div class="financial-highlight">
+                  <span class="amount"
+                    >{{ "%.2f"|format(order.financial_info.monthly_payment) }}
+                    PLN</span
+                  >
+                  <span class="label">{{ _('Monthly Payment') }}</span>
+                </div>
+                {% if order.financial_info.total_price %}
+                <p>
+                  <strong>{{ _('Total Price') }}:</strong> {{
+                  "%.2f"|format(order.financial_info.total_price) }} PLN
+                </p>
+                {% endif %} {% if order.financial_info.term_months %}
+                <p>
+                  <strong>{{ _('Term') }}:</strong> {{ order.financial_info.term_months }}
+                  {{ _('months') }}
+                </p>
+                {% endif %} {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% endif %}
+      </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>Refreshing Tesla order data...</p>
+      </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast" style="display: none">
+      <div class="toast-content">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  </body>
+</html>
