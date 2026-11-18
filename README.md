@@ -41,7 +41,7 @@ Two things to know:
 ## Requirements
 
 - Python 3.10 or newer
-- A Tesla account with an order (a browser to log in once)
+- A Tesla account with an order (a desktop browser to log in once)
 - Optional: a Railway account for hosting
 
 ## Installation
@@ -60,9 +60,12 @@ pip install -r requirements.txt
 python3 tesla_order_status.py
 ```
 
-1. Your browser opens the Tesla login page. Log in.
-2. After login the browser lands on a "Page Not Found" page at `auth.tesla.com/void/callback`. That is expected. Copy the full URL from the address bar and paste it into the terminal.
-3. Answer `y` to "save the tokens" and `y` to "save the order information".
+1. Your browser opens the Tesla login page. Before you log in, open the browser's Developer Tools (`F12`, on macOS `Cmd+Option+I`) and switch to the Console tab (or the Network tab).
+2. Log in. Tesla then redirects to an address that starts with `tesla://auth/callback?code=...`. A browser cannot open that kind of address, so the page stays blank or shows an error. That is expected.
+3. In the Developer Tools find the line with `tesla://auth/callback?code=...`, copy the full address and paste it into the terminal. The upstream project has [screenshots of this step](https://github.com/niklaswa/tesla-order-status#how-to-authenticate--login).
+4. Answer `y` to "save the tokens" and `y` to "save the order information".
+
+`curl_cffi` in `requirements.txt` is required, not optional. Tesla checks the TLS fingerprint of the token request; a token fetched with plain `requests` is later rejected with `403 Forbidden`. `curl_cffi` connects the way a real browser does.
 
 This creates two files in the current directory:
 
@@ -135,7 +138,7 @@ Dashboard pokazuje status zamówienia Tesli (oś czasu, postęp zadań, finansow
 Nie potrzebujesz konta deweloperskiego Tesli ani Fleet API. Wystarczy zwykłe konto Tesla, na którym złożono zamówienie: skrypt loguje się tak jak aplikacja Tesli na telefon i pobiera dane prosto z serwerów Tesli. To nieoficjalne API, Tesla może je w każdej chwili zmienić.
 
 1. `pip install -r requirements.txt`
-2. `python3 tesla_order_status.py`: zaloguj się, po przekierowaniu na stronę z błędem skopiuj cały adres z paska przeglądarki do terminala, zapisz tokeny i zamówienia.
+2. `python3 tesla_order_status.py`: przed logowaniem otwórz w przeglądarce narzędzia deweloperskie (F12, na Macu Cmd+Option+I), zakładka Console. Zaloguj się. Tesla przekieruje na adres `tesla://auth/callback?code=...`, którego przeglądarka nie otworzy. Skopiuj cały ten adres z konsoli do terminala, zapisz tokeny i zamówienia.
 3. `python3 run_local.py` i otwórz http://localhost:8000. Język zmienisz przełącznikiem na stronie.
 4. Na Railway ustaw `SECRET_KEY` i `TESLA_TOKENS_JSON` (zawartość `tesla_tokens.json`). Ustaw też `DASHBOARD_PASSWORD` (hasło Basic Auth, login domyślnie `admin`): bez niego aplikacja odmawia zdalnych żądań.
 5. Nigdy nie wrzucaj na GitHub plików `tesla_tokens.json`, `tesla_orders.json` ani raportów (lista wyżej): zawierają tokeny i dane osobowe.

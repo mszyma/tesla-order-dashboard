@@ -102,6 +102,7 @@ class TeslaStore(int, Enum):
 
     # Norway
     NO_BOD = (26253, 'Bodø')
+    NO_DRAMMEN = (26255, 'Drammen')
     NO_OSLSKI = (26256, 'Oslo-Ski')
 
     # Poland
@@ -160,6 +161,9 @@ class TeslaStore(int, Enum):
     UK_SOL = (334993, 'Tesla Centre Solihull')
     UK_WOL = (400821, 'Tesla Centre Wolverhampton')
     UK_BRI = (1039, 'Tesla Certified Pre-Owned Centre Bristol')
+
+    # New Zealand
+    NZ_CHC = (30962, 'Christchurch')
 
     @classmethod
     def from_str(cls, input_str):

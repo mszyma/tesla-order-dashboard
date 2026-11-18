@@ -27,6 +27,8 @@ import base64
 import hashlib
 import requests
 import urllib.parse
+# Tesla's auth endpoint fingerprints the TLS handshake of the token request.
+from curl_cffi import requests as tls_requests
 from tesla_stores import TeslaStore
 
 app = Flask(__name__)
@@ -88,7 +90,7 @@ logger = logging.getLogger(__name__)
 
 # Tesla API Constants
 CLIENT_ID = 'ownerapi'
-REDIRECT_URI = 'https://auth.tesla.com/void/callback'
+REDIRECT_URI = 'tesla://auth/callback'
 AUTH_URL = 'https://auth.tesla.com/oauth2/v3/authorize'
 TOKEN_URL = 'https://auth.tesla.com/oauth2/v3/token'
 SCOPE = 'openid email offline_access'
@@ -167,7 +169,7 @@ class TeslaAPIClient:
             'client_id': CLIENT_ID,
             'refresh_token': refresh_token,
         }
-        response = requests.post(TOKEN_URL, data=token_data)
+        response = tls_requests.post(TOKEN_URL, data=token_data, impersonate='chrome')
         response.raise_for_status()
         return response.json()
 

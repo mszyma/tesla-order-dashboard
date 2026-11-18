@@ -3,3 +3,4 @@ Flask-Babel==4.0.0
 requests==2.34.2
 python-dateutil==2.8.2
 gunicorn==27.0.1
+curl_cffi==0.16.3
