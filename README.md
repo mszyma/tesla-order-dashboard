@@ -19,7 +19,7 @@ English and Polish UI. Polska wersja: see the end of this file.
 
 ## Requirements
 
-- Python 3.9 or newer
+- Python 3.10 or newer
 - A Tesla account with an order (a browser to log in once)
 - Optional: a Railway account for hosting
 
