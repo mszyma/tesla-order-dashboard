@@ -6,6 +6,27 @@ English and Polish UI. Polska wersja: see the end of this file.
 
 > Unofficial. Not affiliated with Tesla. It uses undocumented endpoints that Tesla can change at any time.
 
+![Dashboard preview with made-up example data](docs/preview.png)
+
+## Where the data comes from
+
+You do not need a Tesla developer account, a Fleet API application or any API key. A regular Tesla account, the one the order was placed on, is enough.
+
+The script logs in the same way the official Tesla mobile app does (OAuth client `ownerapi`) and reads the same servers:
+
+| Step | Server |
+| --- | --- |
+| Login | `auth.tesla.com` |
+| List of your orders | `owner-api.teslamotors.com/api/1/users/orders` |
+| Order details (tasks, delivery, VIN) | `akamai-apigateway-vfx.tesla.com/tasks` |
+
+Your password is typed only on Tesla's own login page. The script receives tokens, stores them in a local file and talks to Tesla directly; there is no third-party server in between.
+
+Two things to know:
+
+- This API is unofficial and undocumented. Tesla can change or block it at any time. If the order details stop loading, check the upstream project for a newer `APP_VERSION`.
+- The official Fleet API (the one that needs a developer account) is built for delivered vehicles and, as far as we know, does not expose order status before delivery, so it is not an alternative here.
+
 ## Features
 
 - Order overview: status, model, VIN (when assigned), reference number
@@ -110,6 +131,8 @@ The core of this project, `tesla_order_status.py` (login and order retrieval) an
 ## Po polsku (skrót)
 
 Dashboard pokazuje status zamówienia Tesli (oś czasu, postęp zadań, finansowanie, konfigurację, odbiór) i ma interfejs po polsku.
+
+Nie potrzebujesz konta deweloperskiego Tesli ani Fleet API. Wystarczy zwykłe konto Tesla, na którym złożono zamówienie: skrypt loguje się tak jak aplikacja Tesli na telefon i pobiera dane prosto z serwerów Tesli. To nieoficjalne API, Tesla może je w każdej chwili zmienić.
 
 1. `pip install -r requirements.txt`
 2. `python3 tesla_order_status.py`: zaloguj się, po przekierowaniu na stronę z błędem skopiuj cały adres z paska przeglądarki do terminala, zapisz tokeny i zamówienia.

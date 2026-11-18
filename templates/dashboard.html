@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>🚗 {{ _('Tesla Order Dashboard') }}</title>
+    <title>{{ _('Tesla Order Dashboard') }}</title>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link
@@ -36,8 +36,8 @@
           <div class="header-right">
             <div class="language-switcher">
               <select id="languageSelect" class="language-select">
-                <option value="en" {{ 'selected' if session.get('language', 'en') == 'en' else '' }}>🇺🇸 English</option>
-                <option value="pl" {{ 'selected' if session.get('language', 'en') == 'pl' else '' }}>🇵🇱 Polski</option>
+                <option value="en" {{ 'selected' if session.get('language', 'en') == 'en' else '' }}>English</option>
+                <option value="pl" {{ 'selected' if session.get('language', 'en') == 'pl' else '' }}>Polski</option>
               </select>
             </div>
             <button id="refreshBtn" class="refresh-btn">
